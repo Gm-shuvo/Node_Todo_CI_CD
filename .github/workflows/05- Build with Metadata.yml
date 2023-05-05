@@ -30,7 +30,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v4
         with: 
-          image: gmshuvo/docker-ci-automation
+          images: gmshuvo/docker-ci-automation
           flavor: |
             latest=flase
           tag: |
