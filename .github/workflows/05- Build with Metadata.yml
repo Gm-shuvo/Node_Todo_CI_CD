@@ -14,8 +14,8 @@ jobs:
 
     steps:
 #     Enable building against a wider range of platforms.
-      - name: Docker Setup QEMU
-        uses: docker/setup-qemu-action@v2.1.0
+#       - name: Docker Setup QEMU
+#         uses: docker/setup-qemu-action@v2.1.0
    
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -56,4 +56,4 @@ jobs:
             cache-from: type=gha
             cache-to: type=gha,mode=max
   #           define platforms
-            platforms: linux/amd64,linux/arm64,linux/arm/v7
+#             platforms: linux/amd64,linux/arm64,linux/arm/v7
