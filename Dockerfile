@@ -8,7 +8,7 @@ WORKDIR /app
 COPY --from=builder /app /app
 RUN npm run test
 
-FROM node:12.2.0-alpine
+FROM node:12.2.0-alpine AS prod
 WORKDIR /app
 COPY --from=builder /app /app
 EXPOSE 8000
