@@ -75,6 +75,8 @@ jobs:
           export TESTING_IMAGE=ghcr.io/gm-shuvo/docker-ci-automation:${{ github.run_id }}
           envsubst < manifests/deployment.yaml  | kubectl apply -f -
           kubectl rollout status deployment myapp
+          kubectl get pods
+          kubectl get deployment
           kubectl exec deploy/myapp -- curl --fail localhost
     
     
