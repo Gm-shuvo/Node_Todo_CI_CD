@@ -1,4 +1,4 @@
-name: 06 Build and Scan + Report
+name: 07 Build and Scan + Report
 on:
   push:
     branches: [ "master" ]
