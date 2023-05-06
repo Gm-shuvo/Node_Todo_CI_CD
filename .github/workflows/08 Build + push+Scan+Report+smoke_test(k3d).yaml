@@ -70,8 +70,8 @@ jobs:
         run: |
           kubectl create secret docker-registry regcred \
             --docker-server=https://ghcr.io \
-            --docker-username=${{ github.actor }} \
-            --docker-password=${{ secrets.GIT_TOKEN }}
+            --docker-username=${{ secrets.DOCKERHUB_USERNAME }} \
+            --docker-password=${{ secrets.DOCKERHUB_TOKEN }}
           export TESTING_IMAGE=ghcr.io/gm-shuvo/docker-ci-automation:${{ github.run_id }}
           envsubst < manifests/deployment.yaml  | kubectl apply -f -
           kubectl rollout status deployment myapp
@@ -95,7 +95,7 @@ jobs:
       - name: Docker build and push to dockerhub
         uses: docker/build-push-action@v4
         with:
-          push: false # false for this demo to prevent overwriting image tags of other examples
+          push: true # false for this demo to prevent overwriting image tags of other examples
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           cache-from: type=gha
