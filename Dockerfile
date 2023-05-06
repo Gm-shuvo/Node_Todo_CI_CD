@@ -2,7 +2,6 @@ FROM node:12.2.0-alpine AS builder
 WORKDIR /app
 COPY . /app
 RUN npm install
-RUN npm run build
 
 FROM node:12.2.0-alpine AS test
 WORKDIR /app
