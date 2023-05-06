@@ -1,12 +1,16 @@
-FROM node:12.2.0-alpine
-# Define the working directory inside the container
+FROM node:12.2.0-alpine AS builder
 WORKDIR /app
-# Copy the file from your host to your current location.
 COPY . /app
-# Run the command inside your image filesystem.
 RUN npm install
+RUN npm run build
+
+FROM node:12.2.0-alpine AS test
+WORKDIR /app
+COPY --from=builder /app /app
 RUN npm run test
-# Inform Docker that the container is listening on the specified port at runtime.
+
+FROM node:12.2.0-alpine
+WORKDIR /app
+COPY --from=builder /app /app
 EXPOSE 8000
-# Run the specified command within the container.
-CMD ["node","app.js"]
+CMD ["npm", "start"]
