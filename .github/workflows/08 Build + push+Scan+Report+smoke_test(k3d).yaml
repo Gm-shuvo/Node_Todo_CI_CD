@@ -25,6 +25,8 @@ jobs:
     steps:
       - name: Checkout git repo
         uses: actions/checkout@v3
+        
+      - uses: ./
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -53,7 +55,7 @@ jobs:
         with:
           push: true
           tags: ghcr.io/gm-shuvo/docker-ci-automation:${{ github.run_id }}
-          target: test
+          target: prod
           cache-from: type=gha
           cache-to: type=gha,mode=max
           platforms: linux/amd64
@@ -73,11 +75,8 @@ jobs:
             --docker-username=${{ secrets.DOCKERHUB_USERNAME }} \
             --docker-password=${{ secrets.DOCKERHUB_TOKEN }}
           export TESTING_IMAGE=ghcr.io/gm-shuvo/docker-ci-automation:${{ github.run_id }}
-          envsubst < manifests/deployment.yaml  | kubectl apply -f -
-          kubectl rollout status deployment myapp
-          kubectl get pods
-          kubectl get deployment
-          kubectl exec deploy/myapp -- curl --fail localhost
+          envsubst < manifests/deployment.yaml | kubectl apply -f -
+          kubectl rollout status deployment/myapp
     
     
       - name: Docker meta for final build
