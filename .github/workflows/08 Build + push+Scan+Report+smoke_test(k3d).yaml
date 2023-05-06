@@ -5,6 +5,10 @@ on:
   pull_request:
     branches: [ "master" ]
     
+env:
+  KUBECONFIG: ./kubeconfig.yaml
+
+    
 jobs:
   build-image:
     name: Build Images
