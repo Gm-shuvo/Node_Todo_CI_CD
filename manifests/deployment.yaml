@@ -2,9 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: myapp
-  labels:
-    app: myapp
 spec:
+  progressDeadlineSeconds: 600
   replicas: 1
   selector:
     matchLabels:
